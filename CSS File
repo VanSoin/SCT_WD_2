@@ -1,0 +1,117 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    transition: background-color 0.3s ease;
+}
+
+
+body.dark-mode {
+    background: url('dark-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #333;
+}
+
+
+.stopwatch-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    width: 350px;
+    transform: scale(0.9);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stopwatch-container:hover {
+    transform: scale(1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode for stopwatch container */
+body.dark-mode .stopwatch-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+/* Time display */
+.time {
+    font-size: 48px;
+    color: #333;
+    margin: 20px 0;
+    letter-spacing: 2px;
+}
+
+/* Dark mode for time display */
+body.dark-mode .time {
+    color: #fff;
+}
+
+/* Button styling with hover effect */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode for buttons */
+body.dark-mode .button {
+    background-color: #444;
+    color: #fff;
+}
+
+body.dark-mode .button:hover {
+    background-color: #222;
+}
+
+/* Lap times with shadow */
+.lap-times {
+    margin-top: 20px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.lap-time {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.lap-time:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark mode for lap times */
+body.dark-mode .lap-time {
+    background-color: #555;
+    color: #fff;
+}

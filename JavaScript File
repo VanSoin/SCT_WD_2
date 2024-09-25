@@ -1,0 +1,73 @@
+let startTime, updatedTime, difference = 0, isRunning = false, lapCounter = 1;
+let interval;
+const display = document.getElementById('display');
+const lapTimes = document.getElementById('lapTimes');
+const startStopBtn = document.getElementById('startStopBtn');
+const lapBtn = document.getElementById('lapBtn');
+const resetBtn = document.getElementById('resetBtn');
+const themeSwitch = document.getElementById('theme-switch');
+
+
+function formatTime(time) {
+    let milliseconds = Math.floor((time % 1000) / 10);
+    let seconds = Math.floor((time / 1000) % 60);
+    let minutes = Math.floor((time / (1000 * 60)) % 60);
+    let hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+
+    return `${(hours < 10 ? '0' : '') + hours}:${(minutes < 10 ? '0' : '') + minutes}:${(seconds < 10 ? '0' : '') + seconds}.${(milliseconds < 10 ? '0' : '') + milliseconds}`;
+}
+
+
+function startStopwatch() {
+    startTime = new Date().getTime() - difference;
+    interval = setInterval(updateTime, 10);
+    isRunning = true;
+    startStopBtn.textContent = 'Pause';
+    lapBtn.disabled = false;
+    resetBtn.disabled = false;
+}
+
+
+function pauseStopwatch() {
+    clearInterval(interval);
+    difference = new Date().getTime() - startTime;
+    isRunning = false;
+    startStopBtn.textContent = 'Start';
+}
+
+function resetStopwatch() {
+    clearInterval(interval);
+    difference = 0;
+    display.textContent = '00:00:00.00';
+    lapTimes.innerHTML = '';
+    lapCounter = 1;
+    isRunning = false;
+    startStopBtn.textContent = 'Start';
+    lapBtn.disabled = true;
+    resetBtn.disabled = true;
+}
+
+function updateTime() {
+    updatedTime = new Date().getTime() - startTime;
+    display.textContent = formatTime(updatedTime);
+}
+
+function recordLap() {
+    let lapTime = document.createElement('div');
+    lapTime.classList.add('lap-time');
+    lapTime.textContent = `Lap ${lapCounter++}: ${formatTime(updatedTime)}`;
+    lapTimes.appendChild(lapTime);
+    lapTimes.scrollTop = lapTimes.scrollHeight;
+}
+
+
+startStopBtn.addEventListener('click', () => {
+    isRunning ? pauseStopwatch() : startStopwatch();
+});
+
+lapBtn.addEventListener('click', recordLap);
+resetBtn.addEventListener('click', resetStopwatch);
+
+themeSwitch.addEventListener('change', () => {
+    document.body.classList.toggle('dark-mode');
+});
